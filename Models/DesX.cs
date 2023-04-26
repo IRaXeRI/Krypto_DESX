@@ -29,7 +29,7 @@ public class DesX
     private bool[,] RightHalf;   // [17, 32] RightHalf is a temporary place to store right part of IP
 
     // main function used to encrypt data, requires three string keys and data to encrypt
-    public string encrypt(string newData, string K, string K_1, string K_2) {
+    public byte[] encrypt(byte[] newData, string K, string K_1, string K_2) {
         bool[] temp;                                              // Adding temporary references used in loop
         bool[] temp2;                                             // Adding temporary references used in loop
         DataSplit = new List<bool[]>();                           // cleaning lists
@@ -61,7 +61,7 @@ public class DesX
     }
     
     // main function used to encrypt data, requires three string keys and data to encrypt
-    public string decrypt(string newData, string K, string K_1, string K_2) {
+    public byte[] decrypt(byte[] newData, string K, string K_1, string K_2) {
         bool[] temp;                                              // Adding temporary references used in loop
         bool[] temp2;                                             // Adding temporary references used in loop
         DataSplit = new List<bool[]>();                           // cleaning lists

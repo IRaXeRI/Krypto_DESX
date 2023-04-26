@@ -152,10 +152,10 @@ public class MainViewModel : INotifyPropertyChanged
 
     public void encode()
     {
-        DataEncrypted = desX.encrypt(DataDecrypted, MainKey, Key1, Key2);
+        DataBytesEncrypted = desX.encrypt(DataBytesDecrypted, MainKey, Key1, Key2);
     }
     public void decode() {
-        DataDecrypted = desX.decrypt(DataEncrypted, MainKey, Key1, Key2);
+        DataBytesDecrypted = desX.decrypt(DataBytesEncrypted, MainKey, Key1, Key2);
     }
 
     public void importDecryptedFile()
