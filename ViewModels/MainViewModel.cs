@@ -113,7 +113,6 @@ public class MainViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(DataDecrypted));
         }
     }
-    
     public byte[] DataBytesEncrypted {
         get => PrivDataBytesEncrypted;
         set
@@ -125,7 +124,6 @@ public class MainViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(DataDecrypted));
         }
     }
-    
     public byte[] DataBytesDecrypted {
         get => PrivDataBytesDecrypted;
         set
@@ -152,15 +150,21 @@ public class MainViewModel : INotifyPropertyChanged
 
     public void encode()
     {
+        DataEncrypted = "";
         DataBytesEncrypted = desX.encrypt(DataBytesDecrypted, MainKey, Key1, Key2);
+        DataEncrypted = System.Text.Encoding.Default.GetString(DataBytesEncrypted);
     }
     public void decode() {
+        DataDecrypted = "";
         DataBytesDecrypted = desX.decrypt(DataBytesEncrypted, MainKey, Key1, Key2);
+        DataDecrypted = System.Text.Encoding.Default.GetString(DataBytesDecrypted);
     }
 
     public void importDecryptedFile()
     {
         DataBytesDecrypted = saveLoad.load(PrivPathDecrypted);
+        DataDecrypted = System.Text.Encoding.Default.GetString(DataBytesDecrypted);
+        DataEncrypted = "";
     }
     
     public void saveDecryptedFile()
@@ -171,6 +175,8 @@ public class MainViewModel : INotifyPropertyChanged
     public void importEncryptedFile()
     {
         DataBytesEncrypted = saveLoad.load(PrivPathEncrypted);
+        DataEncrypted = System.Text.Encoding.Default.GetString(DataBytesEncrypted);
+        DataDecrypted = "";
     }
     
     public void saveEncryptedFile()
