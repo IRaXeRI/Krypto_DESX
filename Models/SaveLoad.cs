@@ -5,16 +5,15 @@ using NUnit.Framework.Constraints;
 
 public class SaveLoad
 {
-	public string load(string readPath) {
-		return File.ReadAllText(readPath, Encoding.UTF8);
+	public byte[] load(string readPath) {
+		return File.ReadAllBytes(readPath);
 	}
 
-	public void save(string codePath, string msg) {
+	public void save(string codePath, byte[] msg) {
 		using (FileStream fileCreateStream = File.Create(codePath)) {
 		}
-		string writingLine = msg;
 		using (StreamWriter write = new StreamWriter(codePath)) {
 		}
-		File.AppendAllText(codePath, new string(writingLine.ToArray()), Encoding.UTF8);
+		File.WriteAllBytes(codePath, msg);
 	}
 }

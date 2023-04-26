@@ -17,6 +17,8 @@ public class MainViewModel : INotifyPropertyChanged
     private string PrivDataDecrypted = "";
     private string PrivPathDecrypted = "";
     private string PrivPathEncrypted = "";
+    private byte[] PrivDataBytesEncrypted;
+    private byte[] PrivDataBytesDecrypted;
 
     public string name1 {
         get => PrivName1;
@@ -111,6 +113,30 @@ public class MainViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(DataDecrypted));
         }
     }
+    
+    public byte[] DataBytesEncrypted {
+        get => PrivDataBytesEncrypted;
+        set
+        {
+            if (PrivDataBytesEncrypted == value)
+                return;
+
+            PrivDataBytesEncrypted = value;
+            OnPropertyChanged(nameof(DataDecrypted));
+        }
+    }
+    
+    public byte[] DataBytesDecrypted {
+        get => PrivDataBytesDecrypted;
+        set
+        {
+            if (PrivDataBytesDecrypted == value)
+                return;
+
+            PrivDataBytesDecrypted = value;
+            OnPropertyChanged(nameof(DataDecrypted));
+        }
+    }
 
     private DesX desX = new DesX();
     private SaveLoad saveLoad = new SaveLoad();
@@ -134,22 +160,22 @@ public class MainViewModel : INotifyPropertyChanged
 
     public void importDecryptedFile()
     {
-        DataDecrypted = saveLoad.load(PrivPathDecrypted);
+        DataBytesDecrypted = saveLoad.load(PrivPathDecrypted);
     }
     
     public void saveDecryptedFile()
     {
-        saveLoad.save(PrivPathDecrypted, PrivDataDecrypted);
+        saveLoad.save(PrivPathDecrypted, DataBytesDecrypted);
     }
     
     public void importEncryptedFile()
     {
-        DataEncrypted = saveLoad.load(PrivPathEncrypted);
+        DataBytesEncrypted = saveLoad.load(PrivPathEncrypted);
     }
     
     public void saveEncryptedFile()
     {
-        saveLoad.save(PrivPathEncrypted, PrivDataEncrypted);
+        saveLoad.save(PrivPathEncrypted, DataBytesEncrypted);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
